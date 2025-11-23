@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = "force-static";
+export const revalidate = 3600; // Revalidate every hour
+
 interface Poem {
   id: string;
   title: string;
