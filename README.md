@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# जग ग्वालियरी - Poetry Website
 
-## Getting Started
+A beautiful, modern Hindi poetry website built with Next.js, TypeScript, Tailwind CSS, and React.
 
-First, run the development server:
+## 🎨 Features
+
+- ✨ **Beautiful UI** - Modern design with gradient backgrounds and smooth animations
+- 🔍 **Search Functionality** - Search poems by title, content, or author (supports Hindi)
+- 📱 **Fully Responsive** - Works perfectly on mobile, tablet, and desktop
+- ⚡ **Fast Performance** - Built with Next.js 14 and optimized for speed
+- 🎭 **Modal View** - Read full poems in a beautiful modal dialog
+- 📖 **Devanagari Support** - Full support for Hindi text with Google Fonts
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Font**: Noto Sans Devanagari from Google Fonts
+- **Deployment**: Optimized for GitHub Pages, Vercel, or any static host
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- npm or yarn package manager
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open browser to http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build for Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Create optimized build
+npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Start production server
+npm start
+```
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── api/
+│   │   └── poems/
+│   │       └── route.ts         # Poems API endpoint
+│   ├── layout.tsx               # Root layout with fonts & metadata
+│   ├── page.tsx                 # Main page with search & grid
+│   └── globals.css              # Global Tailwind styles
+└── components/
+    ├── HeroSection.tsx          # Hero banner with title
+    ├── PoemCard.tsx             # Individual poem card with modal
+    ├── SearchBar.tsx            # Search input component
+    ├── ContactSection.tsx       # Contact information section
+    └── Footer.tsx               # Footer with copyright
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Adding New Poems
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To add more poems, edit the `/src/app/api/poems/route.ts` file:
 
-## Deploy on Vercel
+```typescript
+const poems = [
+  {
+    id: "unique-id",
+    title: "कविता का शीर्षक",
+    author: "लेखक का नाम",
+    content: `कविता की सामग्री...
+    एक पंक्ति प्रति लाइन...`,
+  },
+  // Add more poems here
+];
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌐 GitHub Pages Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Setup
+
+1. Create a GitHub repository named `jagdish-goklani`
+2. Push your code:
+```bash
+git remote add origin https://github.com/YOUR_USERNAME/jagdish-goklani.git
+git branch -M main
+git push -u origin main
+```
+
+3. In repository Settings → Pages:
+   - Source: Deploy from branch
+   - Branch: `main`, Folder: `/(root)`
+   - Click Save
+
+4. Your site will be live at: `https://YOUR_USERNAME.github.io/jagdish-goklani/`
+
+### Environment Setup (for next.config.js if needed)
+
+For GitHub Pages with basePath:
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  basePath: "/jagdish-goklani",
+  output: "export",
+};
+
+export default nextConfig;
+```
+
+## 🎨 Customization
+
+### Colors
+
+Edit Tailwind colors in `src/app/globals.css` or use Tailwind's built-in color palette. Currently using:
+- Rose/Pink (`rose-*`)
+- Purple (`purple-*`)
+- Gray (`gray-*`)
+
+### Fonts
+
+Change the Devanagari font in `src/app/layout.tsx`:
+```typescript
+import { Noto_Sans_Devanagari } from "next/font/google";
+```
+
+### Contact Information
+
+Update contact details in `src/components/ContactSection.tsx`
+
+## 📄 License
+
+MIT License - feel free to use and modify for your own projects.
+
+## 🤝 Support
+
+For issues or questions, please create an issue in the repository.
+
+---
+
+**Made with ❤️ for Hindi Poetry**
