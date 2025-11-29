@@ -21,59 +21,33 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadPoems = async () => {
-      try {
-        const response = await fetch("/api/poems");
-        const data = await response.json();
-        setPoems(data);
-        setFilteredPoems(data);
-      } catch (error) {
-        console.error("Failed to load poems:", error);
-        const fallbackPoems: Poem[] = [
-          {
-            id: "pariyon-ka-shehzada",
-            title: "परियों का है यह शहजादा",
-            author: "जग ग्वालियरी",
-            content: `परियों का है यह शहजादा, परी लोक से आया है।
-परी लोक से आकर इसने, सबका मन हर्षाया है।।
+  const loadPoems = async () => {
+    try {
+      const response = await fetch("api/poems");
+      const data = await response.json();
+      setPoems(data);
+      setFilteredPoems(data);
+    } catch (error) {
+      console.error("Failed to load poems:", error);
+      const fallbackPoems: Poem[] = [
+        {
+          id: "banvari-tujhko-kahuun",
+          title: "बनवारी तुझको कहूँ",
+          author: "जग ग्वालियरी",
+          content:
+            "बनवारी तुझको कहूँ, कृष्ण कहूँ घनश्याम।\nजितना सुन्दर रूप है, उतने सुन्दर नाम।।\n\nउतने सुन्दर नाम, भक्ति से मन भर देते।\nतेरे खेल विचित्र, मोह सबको ही लेते।।।\n\nकहते कवि जगराज, कृष्ण की लीला न्यारी।\nरचता स्वांग अनेक, मदन मोहन बनवारी।।\n\nजगदीश गोकलानी — जग ग्वालियरी",
+        },
+      ];
+      setPoems(fallbackPoems);
+      setFilteredPoems(fallbackPoems);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-पीयु हर्षिका का भाई यह, माँ की आँखों का तारा।
-राजदुलारा है पापा का, कितना सुंदर अति प्यारा।।
-ताई कहती नभ से उतरा, ताऊ कहे सितारा है।
-शुभ आशीष दिया दादी ने, बही प्रेम की धारा है।।
+  loadPoems();
+}, []);
 
-भक्ति भाव से दादाजी ने, मंगल गीत सुनाया है।
-परियों का है यह शहजादा, परी लोक से आया है।
-
-मामू मासी मौसा प्यारे, कहते बड़ा सयाना है।
-खुश होकर के झूमे नानी, साथ थिरकते नाना है।।
-ढोल बजें घर के आँगन में, गूँजे हँसी तराना है।
-रौनक छाई कोने-कोने, पावन दिवस सुहाना है।।
-
-राजा बेटा प्यारा आया, मन मधुवन मुसकाया है।
-परियों का है यह शहजादा, परी लोक से आया है।
-
-बहिनों ने अपने आँगन में, सुख का दीप जलाया है।
-उसके आने से घर भर में, शुभ उजियारा छाया है।।
-सपनों में देखा जो कुछ भी, अवितथ बनकर आया है
-खुशियों की सौगात लिए यह, सबके मन को भाया है।
-
-कान्हा बनकर घर में आया, देखो रास रचाया है।।
-परियों का है यह शहजादा, परी लोक से आया है।
-
-मौलिक और स्वरचित
-जगदीश गोकलानी — जग ग्वालियरी`,
-          },
-        ];
-        setPoems(fallbackPoems);
-        setFilteredPoems(fallbackPoems);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPoems();
-  }, []);
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
