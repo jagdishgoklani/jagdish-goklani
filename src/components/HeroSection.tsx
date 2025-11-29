@@ -15,8 +15,9 @@ export default function HeroSection() {
         <div className="mb-8 animate-fade-in">
           <div className="inline-block">
             <div className="w-40 h-40 md:w-56 md:h-56 rounded-2xl overflow-hidden border-4 border-white shadow-2xl">
+              
               <img
-                src="jagdish-goklani/images/image1.jpeg"
+                src="/images/image1.jpeg"
                 alt="जग ग्वालियरी"
                 className="w-full h-full object-cover"
               />

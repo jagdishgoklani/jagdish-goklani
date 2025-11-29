@@ -1,9 +1,11 @@
-import { NextResponse } from "next/server";
+
 import fs from "fs";
 import path from "path";
+import { NextResponse } from "next/server";
+import poems from "./poems-data.json"; // Next will bundle this
 
 export const dynamic = "force-static";
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600;
 
 interface Poem {
   id: string;
@@ -17,7 +19,13 @@ let cachedPoems: Poem[] | null = null;
 function loadPoemsFromFile(): Poem[] {
   try {
     // Try to load from public/poems-data.json
-    const filePath = path.join(process.cwd(), "public/poems-data.json");
+    const filePath = path.join(
+  process.cwd(),
+  "app",
+  "api",
+  "poems",
+  "poems-data.json"
+);
     if (fs.existsSync(filePath)) {
       const fileContent = fs.readFileSync(filePath, "utf-8");
       const loadedPoems = JSON.parse(fileContent);
@@ -170,6 +178,5 @@ function loadPoemsFromFile(): Poem[] {
 }
 
 export async function GET() {
-  const poems = cachedPoems || loadPoemsFromFile();
   return NextResponse.json(poems);
 }
