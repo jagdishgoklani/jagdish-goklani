@@ -34,16 +34,25 @@ export default function ContentDisplay({
 
   const loadContent = async () => {
     try {
-      const response = await fetch("/api/poems");
-      const data: Poem[] = await response.json();
-      setPoems(data);
+      try {
+        const response = await fetch("api/poems");
+        const data: Poem[] = await response.json();
+        setPoems(data);
+      } catch (apiError) {
+        console.warn("API not available, using fallback content");
+      }
 
       // Generate content based on section and subsection
       const generatedContent = generateContent(sectionId, subsectionId);
       setContent(generatedContent);
     } catch (error) {
       console.error("Failed to load content:", error);
-      setContent("Content could not be loaded. Please try again later.");
+      setContent(`
+        <div class="error-section">
+          <h2 style="color: #d32f2f;">त्रुटि</h2>
+          <p style="color: #666;">सामग्री लोड नहीं हो सकी। कृपया पुनः प्रयास करें।</p>
+        </div>
+      `);
     } finally {
       setLoading(false);
     }
