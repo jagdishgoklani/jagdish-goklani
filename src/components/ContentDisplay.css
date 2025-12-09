@@ -1,0 +1,162 @@
+.content-display {
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.search-container {
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  padding: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #d5a6bd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: white;
+  color: #333;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #6b5b95;
+  box-shadow: 0 0 0 3px rgba(107, 91, 149, 0.1);
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.content-display h1 {
+  font-size: 2.5rem;
+  color: #6b5b95;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.content-display h2 {
+  font-size: 1.8rem;
+  color: #8b7ba8;
+  margin: 25px 0 15px 0;
+  border-bottom: 2px solid #d5a6bd;
+  padding-bottom: 10px;
+}
+
+.content-display h3 {
+  font-size: 1.3rem;
+  color: #6b5b95;
+  margin: 20px 0 10px 0;
+}
+
+.content-display p {
+  line-height: 1.8;
+  color: #333;
+  margin: 15px 0;
+  font-size: 1rem;
+}
+
+.content-display ul {
+  margin: 20px 0;
+  padding-left: 30px;
+  list-style-position: inside;
+}
+
+.content-display li {
+  margin: 10px 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+.author-section,
+.kavita-section,
+.dohawali-section,
+.geet-section,
+.ghazal-section,
+.default-section {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #6b5b95;
+}
+
+.poetry-info {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.doha-content {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.doha-text {
+  line-height: 2;
+  font-size: 1.05rem;
+  color: #444;
+  text-align: center;
+}
+
+.doha-text p {
+  margin: 25px 0;
+  padding: 15px;
+  background: linear-gradient(90deg, rgba(107, 91, 149, 0.05), transparent);
+  border-left: 3px solid #d5a6bd;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.content-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 1.2rem;
+  color: #6b5b95;
+}
+
+@media (max-width: 768px) {
+  .content-display {
+    padding: 20px;
+  }
+
+  .content-display h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .content-display h2 {
+    font-size: 1.4rem;
+  }
+
+  .doha-text p {
+    font-size: 0.95rem;
+    margin: 15px 0;
+    padding: 10px;
+  }
+}

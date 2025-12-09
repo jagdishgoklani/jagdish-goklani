@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Sidebar from "@/components/Sidebar";
+import ContentDisplay from "@/components/ContentDisplay";
 import HeroSection from "@/components/HeroSection";
 import PoemCard from "@/components/PoemCard";
 import SearchBar from "@/components/SearchBar";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import "./page.css";
 
 interface Poem {
   id: string;
@@ -19,35 +22,37 @@ export default function Home() {
   const [filteredPoems, setFilteredPoems] = useState<Poem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [activeSubsection, setActiveSubsection] = useState<string | null>(null);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-  const loadPoems = async () => {
-    try {
-      const response = await fetch("api/poems");
-      const data = await response.json();
-      setPoems(data);
-      setFilteredPoems(data);
-    } catch (error) {
-      console.error("Failed to load poems:", error);
-      const fallbackPoems: Poem[] = [
-        {
-          id: "banvari-tujhko-kahuun",
-          title: "बनवारी तुझको कहूँ",
-          author: "जग ग्वालियरी",
-          content:
-            "बनवारी तुझको कहूँ, कृष्ण कहूँ घनश्याम।\nजितना सुन्दर रूप है, उतने सुन्दर नाम।।\n\nउतने सुन्दर नाम, भक्ति से मन भर देते।\nतेरे खेल विचित्र, मोह सबको ही लेते।।।\n\nकहते कवि जगराज, कृष्ण की लीला न्यारी।\nरचता स्वांग अनेक, मदन मोहन बनवारी।।\n\nजगदीश गोकलानी — जग ग्वालियरी",
-        },
-      ];
-      setPoems(fallbackPoems);
-      setFilteredPoems(fallbackPoems);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const loadPoems = async () => {
+      try {
+        const response = await fetch("api/poems");
+        const data = await response.json();
+        setPoems(data);
+        setFilteredPoems(data);
+      } catch (error) {
+        console.error("Failed to load poems:", error);
+        const fallbackPoems: Poem[] = [
+          {
+            id: "banvari-tujhko-kahuun",
+            title: "बनवारी तुझको कहूँ",
+            author: "जग ग्वालियरी",
+            content:
+              "बनवारी तुझको कहूँ, कृष्ण कहूँ घनश्याम।\nजितना सुन्दर रूप है, उतने सुन्दर नाम।।\n\nउतने सुन्दर नाम, भक्ति से मन भर देते।\nतेरे खेल विचित्र, मोह सबको ही लेते।।।\n\nकहते कवि जगराज, कृष्ण की लीला न्यारी।\nरचता स्वांग अनेक, मदन मोहन बनवारी।।\n\nजगदीश गोकलानी — जग ग्वालियरी",
+          },
+        ];
+        setPoems(fallbackPoems);
+        setFilteredPoems(fallbackPoems);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  loadPoems();
-}, []);
-
+    loadPoems();
+  }, []);
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
@@ -64,12 +69,52 @@ export default function Home() {
     setFilteredPoems(filtered);
   };
 
+  const handleNavSelect = (sectionId: string, subsectionId?: string) => {
+    setActiveSection(sectionId);
+    setActiveSubsection(subsectionId || null);
+    setShowContent(true);
+  };
+
+  const handleHome = () => {
+    setShowContent(false);
+    setActiveSection(null);
+    setActiveSubsection(null);
+    setSearchTerm("");
+  };
+
+  if (showContent && activeSection) {
+    return (
+      <main className="page-with-sidebar">
+        <Sidebar
+          onSelect={handleNavSelect}
+          onHome={handleHome}
+          activeSection={activeSection}
+          activeSubsection={activeSubsection || undefined}
+        />
+        <div className="main-content">
+          <ContentDisplay
+            sectionId={activeSection}
+            subsectionId={activeSubsection || undefined}
+            onSearch={handleSearch}
+            searchTerm={searchTerm}
+          />
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen">
+      <Sidebar
+        onSelect={handleNavSelect}
+        onHome={handleHome}
+        activeSection={activeSection || undefined}
+        activeSubsection={activeSubsection || undefined}
+      />
       <HeroSection />
       <div className="container mx-auto px-4 py-12 md:py-20">
         <SearchBar onSearch={handleSearch} />
-        
+
         {loading ? (
           <div className="text-center py-12">
             <p className="text-gray-600 text-lg">लोड कर रहे हैं...</p>
